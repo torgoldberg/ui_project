@@ -17,6 +17,8 @@ class MainPageLocators(object):
     LOGIN_USER = (By.CSS_SELECTOR, "span.styles__StyledMenuUserName-sc-kzgvyp-5")
     SEARCH = (By.CSS_SELECTOR, 'input[data-testid="search-input"]')
     RESULTS = (By.CSS_SELECTOR, 'h3.styles__StyledSearchResultsText-sc-94hniz-2')
+    LOGOUT = (By.CSS_SELECTOR, '[data-testid="profile-menu-wrapper"]')
+    USER_LOGOUT = (By.XPATH, "//main[@id='main-container']/div[2]/nav/div[2]/div[2]/div[2]/div[3]/ul/div[6]/div/h4")
 
 
 class RegistrationPageLocators(object):
@@ -42,4 +44,5 @@ class LoginPageLocators(object):
     SUBMIT = (By.NAME, 'Iniciar sesión')
     ERROR = (By.ID, 'WARNING_FILLED')
     CLOSE = (By.CSS_SELECTOR, 'button[data-testid="modal_close_button"]')
+
 

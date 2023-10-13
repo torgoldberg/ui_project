@@ -1,61 +1,62 @@
-import unittest
-from methods.login_page import LoginPage
-from methods.main_page import MainPage
-from methods.registration_page import RegistrationPage
-from tests.prerequisite_setup import PrerequisiteSetup
+from page_methods.login import Login
+from page_methods.main import Main
+from page_methods.registration import Registration
 import logging as logger
-import logging_config  # Import the logging configuration
+from tests.test_prerequisite import TestPrerequisite
+from page_methods.base import Base
 
 
-class TestMain(PrerequisiteSetup):
+class TestMain(TestPrerequisite):
 
-    def setUp(self):
-        page = MainPage(self.driver)
-        self.assertTrue(page.check_main_page_loaded())
+    def test_01_page_load(self):
+        logger.info(f"Load the main page title finish with success")
 
-    def test_page_load(self):
-        logger.info(f"we load the main page title with success")
-
-    def test_registration(self):
-        page = RegistrationPage(self.driver)
+    def test_02_registration(self):
+        page = Registration(self.driver)
         page.check_registration_page_loaded()
         self.registered_email, self.registered_password = page.enter_registration_data()
-        page = MainPage(self.driver)
+        self.emailAndName = self.registered_email
+        self.password = self.registered_password
+        page = Main(self.driver)
         page.check_connected_user(email=self.registered_email)
-        logger.info(f"we registered a new user with success")
+        logger.info(f"Registered a new user finish with success")
 
-    def test_login(self):
-        emailAndName, password = PrerequisiteSetup.initialise_user()
-        page = LoginPage(self.driver)
+    def test_03_login(self):
+        page = Login(self.driver)
         page.check_login_page_loaded()
-        page.enter_login_data(email=emailAndName, password=password)
-        logger.info("we login with success")
+        page.enter_login_data(email=self.emailAndName, password=self.password)
+        logger.info("Login process finish with success")
 
-    def test_invalid_login(self):
-        emailAndName, password = PrerequisiteSetup.initialise_user()
+    def test_04_invalid_login(self):
+        ApiEmailAndName, ApiPassword = Base.initialise_user()
+        page = Login(self.driver)
+        page.check_login_page_loaded()
+        page.enter_login_data(email=ApiEmailAndName, password=ApiPassword)
         invalid_email_data = ["123456@gmail.com"]
         invalid_password_data = ["12345678"]
+        page = Main(self.driver)
+        page.check_connected_user(email=ApiEmailAndName)
+        page.hover_connected_user_profile()
+        page.select_logout_options_menu()
         for i in invalid_email_data:
-            page = LoginPage(self.driver)
+            page = Login(self.driver)
             page.check_login_page_loaded()
-            page.enter_login_data(email=i, password=password)
-            page.invalid_credentials_error()
+            page.enter_login_data(email=i, password=ApiPassword)
+            error = page.invalid_credentials_error()
             page.close_login_page()
+            page.check_element_no_longer_available(locator=error)
         for i in invalid_password_data:
-            page = LoginPage(self.driver)
+            page = Login(self.driver)
             page.check_login_page_loaded()
-            page.enter_login_data(email=emailAndName, password=i)
-            page.invalid_credentials_error()
+            page.enter_login_data(email=ApiEmailAndName, password=i)
+            error = page.invalid_credentials_error()
             page.close_login_page()
-        logger.info("we test invalid login with success")
+            page.check_element_no_longer_available(locator=error)
+        logger.info("Test invalid login finish with success")
 
-    def test_search(self):
-        page = MainPage(self.driver)
+    def test_05_search(self):
+        page = Main(self.driver)
         search_word = "Guerra de las Galaxias"
         page.write_to_search_bar(word=search_word)
-        page.check_after_search(text="Resultados de: “Guerra de las Galaxias")
-        logger.info("search result finish with success")
-
-
-if __name__ == "__main__":
-    unittest.main()
+        page.check_after_search(text=f'Resultados de: "{search_word}"')
+        logger.info(f"Search result finish with success")
