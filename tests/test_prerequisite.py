@@ -1,7 +1,6 @@
 import unittest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from page_methods.main import Main
 import logging
 
 
@@ -21,8 +20,6 @@ class TestPrerequisite(unittest.TestCase):
         self.driver.delete_all_cookies()
         self.driver.get("https://www.rakuten.tv/es")
         delay = 3
-        page = Main(self.driver)
-        page.check_main_page_loaded()
         logging.basicConfig(level=logging.INFO)
         self.emailAndName = ""
         self.password = ""

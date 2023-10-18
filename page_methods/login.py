@@ -1,8 +1,8 @@
-from page_methods.base import Base
+from page_methods.common import common
 from utils.locators import LoginPageLocators
 
 
-class Login(Base):
+class Login(common):
     def __init__(self, driver):
         self.locator = LoginPageLocators
         super().__init__(driver)

@@ -1,8 +1,8 @@
-from page_methods.base import Base
+from page_methods.common import common
 from utils.locators import *
 
 
-class Main(Base):
+class Main(common):
     def __init__(self, driver):
         self.locator = MainPageLocators
         super().__init__(driver)
@@ -11,7 +11,7 @@ class Main(Base):
         """
         Close the cookies popup and check if the main page is loaded
         """
-        Base.close_cookies_popup(self)
+        common.close_cookies_popup(self)
         self.wait_for_element(*self.locator.HOME_LOGO)
 
     def check_connected_user(self, email):

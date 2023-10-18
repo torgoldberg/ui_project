@@ -10,7 +10,7 @@ import requests
 from selenium.webdriver.common.action_chains import ActionChains
 
 
-class Base(object):
+class common(object):
     def __init__(self, driver):
         self.driver = driver
         self.timeout = 30
@@ -99,8 +99,8 @@ class Base(object):
         """
         Generate a random user data
         """
-        user_email = Base.generate_random_email()
-        user_password = Base.generate_random_string()
+        user_email = common.generate_random_email()
+        user_password = common.generate_random_string()
         return user_email, user_password
 
     @staticmethod

@@ -16,12 +16,12 @@ This project use both of this framweorks to test rakuten.tv.
 ## Installation
 
 in the root project path run the next command to install all dependencies:
-pip install -r requirements.txt
+('pip install -r requirements.txt')
 
 ## Usage
 
 in the root path run the next command to run all tests from test_main:
-python -m unittest 
+('python -m unittest')
 
 in the root path run the next command to run specific test from the test_main:
-python -m unittest -k MyTestCase
+('python -m unittest -k MyTestCase')

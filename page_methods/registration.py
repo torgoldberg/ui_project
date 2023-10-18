@@ -1,8 +1,8 @@
-from page_methods.base import Base
+from page_methods.common import common
 from utils.locators import *
 
 
-class Registration(Base):
+class Registration(common):
     def __init__(self, driver):
         self.locator = RegistrationPageLocators
         super().__init__(driver)
@@ -18,7 +18,7 @@ class Registration(Base):
         """
         Enter registration data, agree to terms of condition, and submit the registration form
         """
-        data = Base.get_user_data()
+        data = common.get_user_data()
         email = self.wait_for_element(*self.locator.EMAIL)
         self.write_to_element(element=email, word=data[0])
         password = self.wait_for_element(*self.locator.PASSWORD)
