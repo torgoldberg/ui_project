@@ -1,22 +1,26 @@
 # ui_project
 
+Test UI in Python for rakuten.tv
+
 ## Table of Contents
 
 - [Description](#description)
 - [Installation](#installation)
 - [Usage](#usage)
 
-
 ## Description
 
-Unittest is a built-in Python testing framework that helps you write and run tests for your Python code.
-Selenium is a popular web testing framework that allows you to automate web browsers for testing purposes.
-This project use both of this framweorks to test rakuten.tv.
+This project uses the following tools and libraries to facilitate UI testing:
+
+- **Unittest**: Unittest is a built-in Python testing framework that simplifies writing and running tests for your Python code.
+
+- **Selenium**: Selenium is a popular web testing framework that enables browser automation for testing web applications.
+
 
 ## Installation
 
-in the root project path run the next command to install all dependencies:
-```
+To install all project dependencies, navigate to the root project path and execute the following command:
+```shell
 pip install -r requirements.txt
 ```
 
