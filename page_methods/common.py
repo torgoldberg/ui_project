@@ -11,8 +11,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 
 class Base(object):
-    def __init__(self, driver, base_url='https://www.rakuten.tv/es'):
-        self.base_url = base_url
+    def __init__(self, driver):
         self.driver = driver
         self.timeout = 30
 
